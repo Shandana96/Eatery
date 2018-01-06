@@ -78,7 +78,7 @@ class MenuController extends Controller
      */
     public function edit($id)
     {
-         $menu = Menu::all();
+         $menu = Menu::find($id);
         // return the view and pass in the var we prev created
         return view('menus.edit')->withMenu($menu);
     }
@@ -105,7 +105,7 @@ class MenuController extends Controller
         
         //save the data to db
         $menu = Menu::find($id);
-        $menu->kName = $request->input('FoodItem');
+        $menu->FoodItem = $request->input('FoodItem');
         $menu->Cost = $request->input('Cost');
 
         $menu->save();
@@ -123,7 +123,7 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        $menu =Kitchen::find($id);
+        $menu =Menu::find($id);
         $menu->delete();
         Session::flash('success','The menu was successfuly Deleted!');
         return redirect()-> route('menus.index');  
